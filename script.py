@@ -19,5 +19,5 @@ if __name__ == "__main__":
     result = num1 + num2
     
     generate_typst_file(num1, num2, result)
-    compile_typst_to_pdf()
+    # compile_typst_to_pdf()
     print("PDF Generated: output.pdf")
