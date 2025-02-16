@@ -28,16 +28,13 @@ jobs:
           echo "NUM1=$NUM1" >> $GITHUB_ENV
           echo "NUM2=$NUM2" >> $GITHUB_ENV
 
-      - name: Run Python script to generate PDF
-        run: |
-          python generate_pdf.py $NUM1 $NUM2
       - name: Typst
         uses: lvignoli/typst-action@v0
         with:
           source_file: |
             output.typ
       - name: Upload PDF as artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: summation-result
           path: output.pdf
