@@ -1,0 +1,39 @@
+name: Generate PDF on Issue
+
+on:
+  issues:
+    types:
+      - opened
+
+jobs:
+  process-input:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Extract numbers from issue title
+        id: extract_numbers
+        run: |
+          TITLE="${{ github.event.issue.title }}"
+          NUMBERS=$(echo $TITLE | grep -oE '[0-9]+')
+          NUM1=$(echo $NUMBERS | cut -d' ' -f1)
+          NUM2=$(echo $NUMBERS | cut -d' ' -f2)
+          echo "NUM1=$NUM1" >> $GITHUB_ENV
+          echo "NUM2=$NUM2" >> $GITHUB_ENV
+
+      - name: Run Python script to generate PDF
+        run: |
+          python generate_pdf.py $NUM1 $NUM2
+
+      - name: Upload PDF as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: summation-result
+          path: output.pdf
