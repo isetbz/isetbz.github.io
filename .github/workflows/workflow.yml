@@ -31,7 +31,11 @@ jobs:
       - name: Run Python script to generate PDF
         run: |
           python generate_pdf.py $NUM1 $NUM2
-
+      - name: Typst
+        uses: lvignoli/typst-action@v0
+        with:
+          source_file: |
+            output.typ
       - name: Upload PDF as artifact
         uses: actions/upload-artifact@v4
         with:
