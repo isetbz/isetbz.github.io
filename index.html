@@ -34,8 +34,8 @@
     </div>
 
     <script>
-        const cin = document.getElementById('cin');
-        const identifiant = document.getElementById('identifiant');
+        const cinInput = document.getElementById('cin');
+        const identifiantInput = document.getElementById('identifiant');
         const queryBtn = document.getElementById('queryBtn');
         const results = document.getElementById('results');
 
@@ -54,8 +54,8 @@
         }
 
         function queryUsers() {
-            const cin = cin.value.trim();
-            const identifiant = identifiant.value.trim();
+            const cin = cinInput.value.trim();
+            const identifiant = identifiantInput.value.trim();
 
             if (!cin || !identifiant) {
                 displayResults('Please enter both user IDs before querying.', 'error');
