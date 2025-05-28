@@ -1,8 +1,11 @@
-const express = require('express');
-const path = require('path');
+import express, { Router } from "express";
+import serverless from "serverless-http";
+
+const api = express();
+
+const router = Router();
+
 require('dotenv').config();
-const app = express();
-const PORT = process.env.PORT || 3000;
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = process.env.MONGODB_ATLAS_URI;
@@ -20,7 +23,7 @@ const db = client.db("dept-ge");
 const students = db.collection("students");
 
 
-exports.handler = async (req, res) => {
+router.post("/query-students", async (req, res) => {
     try {
         const { cin, identifiant } = req.body;
         const student = await students.findOne({ cin: cin });
@@ -52,4 +55,8 @@ exports.handler = async (req, res) => {
             error: error.message
         });
     }
-};
+});
+
+api.use("/api/", router);
+
+export const handler = serverless(api);

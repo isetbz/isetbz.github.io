@@ -68,7 +68,7 @@
             displayResults('Connecting to MongoDB Atlas and querying students...', 'loading');
 
 
-            fetch('/.netlify/functions/query-students', {
+            fetch('/api/query-students', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
