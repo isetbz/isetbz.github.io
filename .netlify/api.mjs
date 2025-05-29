@@ -2,6 +2,7 @@ import express, { Router } from "express";
 import serverless from "serverless-http";
 
 const api = express();
+api.use(express.json());
 
 const router = Router();
 
